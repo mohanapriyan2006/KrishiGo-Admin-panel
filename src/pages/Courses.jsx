@@ -56,67 +56,61 @@ function Courses() {
 
   return (
     <>
-      <div className="content-header">
-        <h2>Courses</h2>
-        <button className="btn btn-primary" onClick={handleAdd}>
-          <Plus size={20} style={{ marginRight: '0.5rem' }} />
+      <div className="bg-white px-8 py-6 border-b border-border flex justify-between items-center">
+        <h2 className="m-0 text-3xl">Courses</h2>
+        <button 
+          className="px-6 py-3 bg-primary text-white rounded-lg font-medium cursor-pointer transition-all duration-200 hover:bg-primary-dark border-none text-base flex items-center gap-2" 
+          onClick={handleAdd}
+        >
+          <Plus size={20} />
           Add Course
         </button>
       </div>
-      <div className="content-body">
-        <div className="table-container">
-          <table>
-            <thead>
+      <div className="p-8">
+        <div className="overflow-x-auto bg-white rounded-xl shadow-sm">
+          <table className="w-full border-collapse">
+            <thead className="bg-bg-light">
               <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Duration</th>
-                <th>Level</th>
-                <th>Status</th>
-                <th>Actions</th>
+                <th className="text-left p-4 font-semibold text-text-dark border-b-2 border-border">Title</th>
+                <th className="text-left p-4 font-semibold text-text-dark border-b-2 border-border">Description</th>
+                <th className="text-left p-4 font-semibold text-text-dark border-b-2 border-border">Duration</th>
+                <th className="text-left p-4 font-semibold text-text-dark border-b-2 border-border">Level</th>
+                <th className="text-left p-4 font-semibold text-text-dark border-b-2 border-border">Status</th>
+                <th className="text-left p-4 font-semibold text-text-dark border-b-2 border-border">Actions</th>
               </tr>
             </thead>
             <tbody>
               {courses.map(course => (
                 <tr key={course.id}>
-                  <td style={{ fontWeight: '500' }}>{course.title}</td>
-                  <td>{course.description}</td>
-                  <td>{course.duration}</td>
-                  <td>
-                    <span style={{
-                      padding: '0.25rem 0.75rem',
-                      borderRadius: '12px',
-                      fontSize: '0.875rem',
-                      backgroundColor: course.level === 'Beginner' ? '#e0f2e9' : 
-                                     course.level === 'Intermediate' ? '#fff4e6' : '#fee2e2',
-                      color: course.level === 'Beginner' ? '#16a34a' : 
-                             course.level === 'Intermediate' ? '#ea580c' : '#dc2626'
-                    }}>
+                  <td className="p-4 border-b border-border font-medium">{course.title}</td>
+                  <td className="p-4 border-b border-border">{course.description}</td>
+                  <td className="p-4 border-b border-border">{course.duration}</td>
+                  <td className="p-4 border-b border-border">
+                    <span className={`px-3 py-1 rounded-xl text-sm ${
+                      course.level === 'Beginner' 
+                        ? 'bg-green-100 text-green-600' 
+                        : course.level === 'Intermediate' 
+                        ? 'bg-orange-100 text-orange-600' 
+                        : 'bg-red-100 text-red-600'
+                    }`}>
                       {course.level}
                     </span>
                   </td>
-                  <td>
-                    <span style={{
-                      padding: '0.25rem 0.75rem',
-                      borderRadius: '12px',
-                      fontSize: '0.875rem',
-                      backgroundColor: '#e0f2e9',
-                      color: '#16a34a'
-                    }}>
+                  <td className="p-4 border-b border-border">
+                    <span className="px-3 py-1 rounded-xl text-sm bg-green-100 text-green-600">
                       {course.status}
                     </span>
                   </td>
-                  <td>
-                    <div className="action-buttons">
+                  <td className="p-4 border-b border-border">
+                    <div className="flex gap-2">
                       <button 
-                        className="icon-btn" 
+                        className="p-2 rounded border-none cursor-pointer inline-flex items-center justify-center transition-all duration-200 hover:opacity-80 bg-primary text-white" 
                         onClick={() => handleEdit(course)}
-                        style={{ backgroundColor: 'var(--color-primary)', color: 'white' }}
                       >
                         <Edit size={18} />
                       </button>
                       <button 
-                        className="icon-btn btn-danger" 
+                        className="p-2 rounded border-none cursor-pointer inline-flex items-center justify-center transition-all duration-200 hover:opacity-80 bg-error text-white" 
                         onClick={() => handleDelete(course.id)}
                       >
                         <Trash2 size={18} />
@@ -131,41 +125,42 @@ function Courses() {
       </div>
 
       {showModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h3>{editingCourse ? 'Edit Course' : 'Add New Course'}</h3>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-8 rounded-xl max-w-2xl w-11/12 max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="m-0 text-2xl">{editingCourse ? 'Edit Course' : 'Add New Course'}</h3>
               <button 
-                className="icon-btn" 
+                className="p-2 rounded border-none cursor-pointer inline-flex items-center justify-center transition-all duration-200 hover:opacity-80 bg-transparent" 
                 onClick={() => setShowModal(false)}
-                style={{ backgroundColor: 'transparent' }}
               >
                 <X size={24} />
               </button>
             </div>
             <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label>Course Title</label>
+              <div className="mb-6">
+                <label className="block mb-2 font-medium text-text-dark">Course Title</label>
                 <input
                   type="text"
                   name="title"
                   value={formData.title}
                   onChange={handleChange}
                   required
+                  className="w-full px-3 py-3 border border-border rounded-lg outline-none transition-colors duration-200 bg-white text-text-dark focus:border-primary"
                 />
               </div>
-              <div className="form-group">
-                <label>Description</label>
+              <div className="mb-6">
+                <label className="block mb-2 font-medium text-text-dark">Description</label>
                 <textarea
                   name="description"
                   value={formData.description}
                   onChange={handleChange}
                   rows="3"
                   required
+                  className="w-full px-3 py-3 border border-border rounded-lg outline-none transition-colors duration-200 bg-white text-text-dark focus:border-primary"
                 />
               </div>
-              <div className="form-group">
-                <label>Duration</label>
+              <div className="mb-6">
+                <label className="block mb-2 font-medium text-text-dark">Duration</label>
                 <input
                   type="text"
                   name="duration"
@@ -173,39 +168,49 @@ function Courses() {
                   onChange={handleChange}
                   placeholder="e.g., 4 weeks"
                   required
+                  className="w-full px-3 py-3 border border-border rounded-lg outline-none transition-colors duration-200 bg-white text-text-dark focus:border-primary"
                 />
               </div>
-              <div className="form-group">
-                <label>Level</label>
+              <div className="mb-6">
+                <label className="block mb-2 font-medium text-text-dark">Level</label>
                 <select
                   name="level"
                   value={formData.level}
                   onChange={handleChange}
                   required
+                  className="w-full px-3 py-3 border border-border rounded-lg outline-none transition-colors duration-200 bg-white text-text-dark focus:border-primary"
                 >
                   <option value="Beginner">Beginner</option>
                   <option value="Intermediate">Intermediate</option>
                   <option value="Advanced">Advanced</option>
                 </select>
               </div>
-              <div className="form-group">
-                <label>Status</label>
+              <div className="mb-6">
+                <label className="block mb-2 font-medium text-text-dark">Status</label>
                 <select
                   name="status"
                   value={formData.status}
                   onChange={handleChange}
                   required
+                  className="w-full px-3 py-3 border border-border rounded-lg outline-none transition-colors duration-200 bg-white text-text-dark focus:border-primary"
                 >
                   <option value="Active">Active</option>
                   <option value="Draft">Draft</option>
                   <option value="Archived">Archived</option>
                 </select>
               </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>
+              <div className="flex gap-4 justify-end mt-6">
+                <button 
+                  type="button" 
+                  className="px-6 py-3 bg-border text-text-dark rounded-lg font-medium cursor-pointer transition-all duration-200 hover:bg-gray-300 border-none text-base" 
+                  onClick={() => setShowModal(false)}
+                >
                   Cancel
                 </button>
-                <button type="submit" className="btn btn-primary">
+                <button 
+                  type="submit" 
+                  className="px-6 py-3 bg-primary text-white rounded-lg font-medium cursor-pointer transition-all duration-200 hover:bg-primary-dark border-none text-base"
+                >
                   {editingCourse ? 'Update' : 'Create'}
                 </button>
               </div>

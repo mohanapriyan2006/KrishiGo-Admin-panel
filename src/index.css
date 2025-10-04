@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --color-primary: #78BB1B;
   --color-primary-dark: #314C1C;
@@ -25,65 +29,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-#root {
-  min-height: 100vh;
-}
-
-a {
-  color: var(--color-primary);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-a:hover {
-  color: var(--color-primary-dark);
-}
-
-button {
-  border-radius: 8px;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 500;
-  font-family: inherit;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
+/* Keep minimal custom styles that complement Tailwind */
 button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-}
-
-input, textarea, select {
-  font-family: inherit;
-  font-size: 1rem;
-  padding: 0.75rem;
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  outline: none;
-  transition: border-color 0.2s;
-  background-color: var(--color-white);
-  color: var(--color-text-dark);
-}
-
-input:focus, textarea:focus, select:focus {
-  border-color: var(--color-primary);
-}
-
-h1, h2, h3, h4, h5, h6 {
-  color: var(--color-text-dark);
-  line-height: 1.2;
 }

@@ -29,19 +29,7 @@ function Leaderboard() {
     }
   };
 
-  const getRankBadgeStyle = (rank) => {
-    if (rank <= 3) {
-      return {
-        backgroundColor: rank === 1 ? '#fef3c7' : rank === 2 ? '#e5e7eb' : '#fed7aa',
-        color: rank === 1 ? '#92400e' : rank === 2 ? '#374151' : '#9a3412',
-        fontWeight: 'bold'
-      };
-    }
-    return {
-      backgroundColor: 'var(--color-bg-light)',
-      color: 'var(--color-text-dark)'
-    };
-  };
+
 
   const topUsers = leaderboard.slice(0, 3);
   const stats = [
@@ -53,72 +41,64 @@ function Leaderboard() {
 
   return (
     <>
-      <div className="content-header">
-        <h2>Leaderboard Management</h2>
+      <div className="bg-white px-8 py-6 border-b border-border flex justify-between items-center">
+        <h2 className="m-0 text-3xl">Leaderboard Management</h2>
       </div>
-      <div className="content-body">
-        <div className="stats-grid" style={{ marginBottom: '2rem' }}>
+      <div className="p-8">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6 mb-8">
           {stats.map((stat, index) => (
-            <div key={index} className="stat-card">
-              <div className="stat-icon" style={{ backgroundColor: `${stat.color}20`, color: stat.color }}>
+            <div key={index} className="bg-white p-6 rounded-xl shadow-sm flex items-center gap-4">
+              <div 
+                className="w-12 h-12 rounded-lg flex items-center justify-center text-2xl"
+                style={{ backgroundColor: `${stat.color}20`, color: stat.color }}
+              >
                 <Trophy size={28} />
               </div>
-              <div className="stat-content">
-                <h3>{stat.value}</h3>
-                <p>{stat.label}</p>
+              <div>
+                <h3 className="m-0 mb-1 text-3xl text-text-dark">{stat.value}</h3>
+                <p className="m-0 text-text-light text-sm">{stat.label}</p>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="card" style={{ marginBottom: '2rem' }}>
-          <h3 style={{ marginBottom: '1.5rem' }}>Top Performers</h3>
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
-            gap: '1.5rem' 
-          }}>
+        <div className="bg-white rounded-xl p-6 shadow-sm mb-8">
+          <h3 className="mb-6">Top Performers</h3>
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6">
             {topUsers.map((user) => (
               <div 
                 key={user.id}
-                style={{
-                  padding: '1.5rem',
-                  backgroundColor: 'var(--color-bg-light)',
-                  borderRadius: '12px',
-                  textAlign: 'center',
-                  border: `2px solid ${user.rank === 1 ? '#FFD700' : user.rank === 2 ? '#C0C0C0' : '#CD7F32'}`
-                }}
+                className={`p-6 bg-bg-light rounded-xl text-center border-2 ${
+                  user.rank === 1 ? 'border-yellow-400' : 
+                  user.rank === 2 ? 'border-gray-400' : 
+                  'border-orange-400'
+                }`}
               >
-                <div style={{ marginBottom: '1rem' }}>
+                <div className="mb-4">
                   {getRankIcon(user.rank)}
                 </div>
-                <h4 style={{ margin: '0.5rem 0' }}>{user.name}</h4>
-                <p style={{ color: 'var(--color-text-light)', fontSize: '0.875rem', marginBottom: '1rem' }}>
+                <h4 className="my-2">{user.name}</h4>
+                <p className="text-text-light text-sm mb-4">
                   {user.email}
                 </p>
-                <div style={{ 
-                  display: 'flex', 
-                  justifyContent: 'space-around',
-                  padding: '1rem 0',
-                  borderTop: '1px solid var(--color-border)'
-                }}>
+                <div className="flex justify-around py-4 border-t border-border">
                   <div>
-                    <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--color-primary)' }}>
+                    <div className="text-2xl font-bold text-primary">
                       {user.points}
                     </div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--color-text-light)' }}>Points</div>
+                    <div className="text-xs text-text-light">Points</div>
                   </div>
                   <div>
-                    <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--color-primary)' }}>
+                    <div className="text-2xl font-bold text-primary">
                       {user.courses}
                     </div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--color-text-light)' }}>Courses</div>
+                    <div className="text-xs text-text-light">Courses</div>
                   </div>
                   <div>
-                    <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--color-primary)' }}>
+                    <div className="text-2xl font-bold text-primary">
                       {user.badges}
                     </div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--color-text-light)' }}>Badges</div>
+                    <div className="text-xs text-text-light">Badges</div>
                   </div>
                 </div>
               </div>
@@ -126,47 +106,46 @@ function Leaderboard() {
           </div>
         </div>
 
-        <div className="table-container">
-          <table>
-            <thead>
+        <div className="overflow-x-auto bg-white rounded-xl shadow-sm">
+          <table className="w-full border-collapse">
+            <thead className="bg-bg-light">
               <tr>
-                <th>Rank</th>
-                <th>User</th>
-                <th>Email</th>
-                <th>Points</th>
-                <th>Courses Completed</th>
-                <th>Badges Earned</th>
+                <th className="text-left p-4 font-semibold text-text-dark border-b-2 border-border">Rank</th>
+                <th className="text-left p-4 font-semibold text-text-dark border-b-2 border-border">User</th>
+                <th className="text-left p-4 font-semibold text-text-dark border-b-2 border-border">Email</th>
+                <th className="text-left p-4 font-semibold text-text-dark border-b-2 border-border">Points</th>
+                <th className="text-left p-4 font-semibold text-text-dark border-b-2 border-border">Courses Completed</th>
+                <th className="text-left p-4 font-semibold text-text-dark border-b-2 border-border">Badges Earned</th>
               </tr>
             </thead>
             <tbody>
               {leaderboard.map(user => (
                 <tr key={user.id}>
-                  <td>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <td className="p-4 border-b border-border">
+                    <div className="flex items-center gap-2">
                       {getRankIcon(user.rank)}
-                      <span style={{
-                        padding: '0.25rem 0.75rem',
-                        borderRadius: '12px',
-                        fontSize: '0.875rem',
-                        ...getRankBadgeStyle(user.rank)
-                      }}>
+                      <span className={`px-3 py-1 rounded-xl text-sm ${
+                        user.rank <= 3 
+                          ? user.rank === 1 
+                            ? 'bg-yellow-100 text-yellow-800 font-bold' 
+                            : user.rank === 2 
+                            ? 'bg-gray-100 text-gray-800 font-bold' 
+                            : 'bg-orange-100 text-orange-800 font-bold'
+                          : 'bg-bg-light text-text-dark'
+                      }`}>
                         #{user.rank}
                       </span>
                     </div>
                   </td>
-                  <td style={{ fontWeight: '500' }}>{user.name}</td>
-                  <td>{user.email}</td>
-                  <td>
-                    <span style={{
-                      color: 'var(--color-primary)',
-                      fontWeight: '600',
-                      fontSize: '1.1rem'
-                    }}>
+                  <td className="p-4 border-b border-border font-medium">{user.name}</td>
+                  <td className="p-4 border-b border-border">{user.email}</td>
+                  <td className="p-4 border-b border-border">
+                    <span className="text-primary font-semibold text-lg">
                       {user.points}
                     </span>
                   </td>
-                  <td>{user.courses}</td>
-                  <td>{user.badges}</td>
+                  <td className="p-4 border-b border-border">{user.courses}</td>
+                  <td className="p-4 border-b border-border">{user.badges}</td>
                 </tr>
               ))}
             </tbody>

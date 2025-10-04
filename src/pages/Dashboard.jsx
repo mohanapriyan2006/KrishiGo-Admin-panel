@@ -51,54 +51,50 @@ function Dashboard() {
 
   return (
     <>
-      <div className="content-header">
-        <h2>Dashboard</h2>
-        <div style={{ color: 'var(--color-text-light)' }}>
+      <div className="bg-white px-8 py-6 border-b border-border flex justify-between items-center">
+        <h2 className="m-0 text-3xl">Dashboard</h2>
+        <div className="text-text-light">
           Welcome back, Admin!
         </div>
       </div>
-      <div className="content-body">
-        <div className="stats-grid">
+      <div className="p-8">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6 mb-8">
           {stats.map((stat, index) => {
             const Icon = stat.icon;
             return (
-              <div key={index} className="stat-card">
-                <div className="stat-icon" style={{ backgroundColor: `${stat.color}20`, color: stat.color }}>
+              <div key={index} className="bg-white p-6 rounded-xl shadow-sm flex items-center gap-4">
+                <div 
+                  className="w-12 h-12 rounded-lg flex items-center justify-center text-2xl"
+                  style={{ backgroundColor: `${stat.color}20`, color: stat.color }}
+                >
                   <Icon size={28} />
                 </div>
-                <div className="stat-content">
-                  <h3>{stat.value}</h3>
-                  <p>{stat.label}</p>
+                <div>
+                  <h3 className="m-0 mb-1 text-3xl text-text-dark">{stat.value}</h3>
+                  <p className="m-0 text-text-light text-sm">{stat.label}</p>
                 </div>
               </div>
             );
           })}
         </div>
 
-        <div className="card">
-          <h3 style={{ marginBottom: '1rem' }}>Recent Activities</h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <div className="bg-white rounded-xl p-6 shadow-sm mb-6">
+          <h3 className="mb-4">Recent Activities</h3>
+          <div className="flex flex-col gap-4">
             {recentActivities.map((activity, index) => (
               <div 
                 key={index}
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  padding: '1rem',
-                  backgroundColor: 'var(--color-bg-light)',
-                  borderRadius: '8px'
-                }}
+                className="flex justify-between items-center p-4 bg-bg-light rounded-lg"
               >
                 <div>
-                  <div style={{ fontWeight: '500', marginBottom: '0.25rem' }}>
+                  <div className="font-medium mb-1">
                     {activity.action}
                   </div>
-                  <div style={{ color: 'var(--color-text-light)', fontSize: '0.875rem' }}>
+                  <div className="text-text-light text-sm">
                     {activity.detail}
                   </div>
                 </div>
-                <div style={{ color: 'var(--color-text-light)', fontSize: '0.875rem' }}>
+                <div className="text-text-light text-sm">
                   {activity.time}
                 </div>
               </div>

@@ -62,18 +62,18 @@ function Login() {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-card">
-        <div className="login-header">
-          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-primary-light to-primary">
+      <div className="bg-white p-10 rounded-2xl shadow-2xl w-full max-w-md">
+        <div className="text-center mb-8">
+          <div className="flex justify-center mb-4">
             <Sprout size={48} color="#78BB1B" />
           </div>
-          <h1>KrishiGo Admin</h1>
-          <p>Sign in to manage your agricultural platform</p>
+          <h1 className="text-3xl mb-2 text-primary-dark">KrishiGo Admin</h1>
+          <p className="text-text-light">Sign in to manage your agricultural platform</p>
         </div>
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="email">Email Address</label>
+          <div className="mb-6">
+            <label htmlFor="email" className="block mb-2 font-medium text-text-dark">Email Address</label>
             <input
               type="email"
               id="email"
@@ -81,11 +81,12 @@ function Login() {
               value={formData.email}
               onChange={handleChange}
               placeholder="admin@krishigo.com"
+              className="w-full px-3 py-3 border border-border rounded-lg outline-none transition-colors duration-200 bg-white text-text-dark focus:border-primary"
             />
-            {errors.email && <div className="error-message">{errors.email}</div>}
+            {errors.email && <div className="text-error text-sm mt-1">{errors.email}</div>}
           </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
+          <div className="mb-6">
+            <label htmlFor="password" className="block mb-2 font-medium text-text-dark">Password</label>
             <input
               type="password"
               id="password"
@@ -93,14 +94,18 @@ function Login() {
               value={formData.password}
               onChange={handleChange}
               placeholder="Enter your password"
+              className="w-full px-3 py-3 border border-border rounded-lg outline-none transition-colors duration-200 bg-white text-text-dark focus:border-primary"
             />
-            {errors.password && <div className="error-message">{errors.password}</div>}
+            {errors.password && <div className="text-error text-sm mt-1">{errors.password}</div>}
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button 
+            type="submit" 
+            className="w-full px-6 py-3 bg-primary text-white rounded-lg font-medium cursor-pointer transition-all duration-200 hover:bg-primary-dark border-none text-base"
+          >
             Sign In
           </button>
         </form>
-        <div style={{ marginTop: '1rem', textAlign: 'center', fontSize: '0.875rem', color: 'var(--color-text-light)' }}>
+        <div className="mt-4 text-center text-sm text-text-light">
           Demo credentials: admin@krishigo.com / admin123
         </div>
       </div>

@@ -56,17 +56,20 @@ function Rewards() {
 
   return (
     <>
-      <div className="content-header">
-        <h2>Rewards</h2>
-        <button className="btn btn-primary" onClick={handleAdd}>
+      <div className="bg-white px-8 py-6 border-b border-border flex justify-between items-center">
+        <h2 className="m-0 text-3xl">Rewards</h2>
+        <button 
+          className="px-6 py-3 bg-primary text-white rounded-lg font-medium cursor-pointer transition-all duration-200 hover:bg-primary-dark border-none text-base flex items-center gap-2" 
+          onClick={handleAdd}
+        >
           <Plus size={20} style={{ marginRight: '0.5rem' }} />
           Add Reward
         </button>
       </div>
-      <div className="content-body">
-        <div className="table-container">
-          <table>
-            <thead>
+      <div className="p-8">
+        <div className="overflow-x-auto bg-white rounded-xl shadow-sm">
+          <table className="w-full border-collapse">
+            <thead className="bg-bg-light">
               <tr>
                 <th>Reward Name</th>
                 <th>Type</th>
@@ -105,7 +108,7 @@ function Rewards() {
                     </span>
                   </td>
                   <td>
-                    <div className="action-buttons">
+                    <div className="flex gap-2">
                       <button 
                         className="icon-btn" 
                         onClick={() => handleEdit(reward)}
@@ -129,9 +132,9 @@ function Rewards() {
       </div>
 
       {showModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <div className="modal-header">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-8 rounded-xl max-w-2xl w-11/12 max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-center mb-6">
               <h3>{editingReward ? 'Edit Reward' : 'Add New Reward'}</h3>
               <button 
                 className="icon-btn" 
@@ -200,7 +203,7 @@ function Rewards() {
                   <option value="Archived">Archived</option>
                 </select>
               </div>
-              <div className="modal-footer">
+              <div className="flex gap-4 justify-end mt-6">
                 <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>
                   Cancel
                 </button>
